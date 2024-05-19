@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { AuthService } from './auth.service';
 
 @Injectable({
   providedIn: 'root'
@@ -8,7 +9,16 @@ import { Observable } from 'rxjs';
 export class TopicService {
   private apiUrl = 'http://localhost:3000/api/topics';
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient, private authService: AuthService) {}
+
+  getHttpOptions() {
+    const token = this.authService.getToken();
+    return {
+      headers: new HttpHeaders({
+        'Authorization': `Bearer ${token}`
+      })
+    };
+  }
 
   getTopics(): Observable<any> {
     return this.http.get<any>(this.apiUrl);
@@ -19,14 +29,14 @@ export class TopicService {
   }
 
   createTopic(topic: any): Observable<any> {
-    return this.http.post<any>(this.apiUrl, topic);
+    return this.http.post<any>(this.apiUrl, topic, this.getHttpOptions());
   }
 
   updateTopic(id: string, topic: any): Observable<any> {
-    return this.http.put<any>(`${this.apiUrl}/${id}`, topic);
+    return this.http.put<any>(`${this.apiUrl}/${id}`, topic, this.getHttpOptions());
   }
 
   deleteTopic(id: string): Observable<any> {
-    return this.http.delete<any>(`${this.apiUrl}/${id}`);
+    return this.http.delete<any>(`${this.apiUrl}/${id}`, this.getHttpOptions());
   }
 }

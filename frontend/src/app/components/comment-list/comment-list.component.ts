@@ -1,13 +1,8 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { CommentService } from '../../services/comment.service';
-import { ActivatedRoute, Router, RouterModule } from '@angular/router';
-import { FormsModule } from '@angular/forms';
-import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-comment-list',
-  imports: [FormsModule, CommonModule, RouterModule],
-  standalone: true,
   templateUrl: './comment-list.component.html',
   styleUrls: ['./comment-list.component.css']
 })

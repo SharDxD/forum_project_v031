@@ -14,7 +14,7 @@ import { CommonModule } from '@angular/common';
 export class TopicListComponent implements OnInit {
   topics: any[] = [];
 
-  constructor(private topicService: TopicService) { }
+  constructor(private topicService: TopicService, private router: Router) {}
 
   ngOnInit(): void {
     this.topicService.getTopics().subscribe(
@@ -25,5 +25,9 @@ export class TopicListComponent implements OnInit {
         console.error('Error fetching topics', error);
       }
     );
+  }
+
+  addTopic(): void {
+    this.router.navigate(['/create-topic']);
   }
 }

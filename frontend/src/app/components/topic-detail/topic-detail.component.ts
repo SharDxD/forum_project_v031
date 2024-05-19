@@ -14,12 +14,13 @@ import { CommonModule } from '@angular/common';
 })
 
 export class TopicDetailComponent implements OnInit {
-  topic: any;
+  topic: any = null; // Initialize topic as null
   topicId!: string; // Use non-null assertion operator
 
   constructor(
     private route: ActivatedRoute,
-    private topicService: TopicService
+    private topicService: TopicService,
+    private router: Router // Inject Router
   ) { }
 
   ngOnInit(): void {
@@ -34,5 +35,13 @@ export class TopicDetailComponent implements OnInit {
         }
       );
     }
+  }
+
+  goBack() {
+    this.router.navigate(['/topics']); // Navigate to topics list
+  }
+
+  editTopic() {
+    this.router.navigate(['/edit-topic', this.topicId]); // Navigate to edit topic
   }
 }

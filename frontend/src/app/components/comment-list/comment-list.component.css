@@ -1,7 +1,25 @@
 .comment-list-container {
-    margin: 20px;
-  }
-  .comment-list-container div {
-    margin-bottom: 10px;
-  }
-  
+  margin: 20px 0;
+  padding: 20px;
+  background-color: #1f1f1f;
+  border-radius: 5px;
+  transition: background-color 0.3s, transform 0.3s;
+}
+
+.comment-list-container:hover {
+  background-color: #2b2b2b;
+  transform: scale(1.01);
+}
+
+.comment-list-container div {
+  margin-bottom: 10px;
+  padding: 10px;
+  border-radius: 5px;
+  background-color: #333333;
+  transition: background-color 0.3s, transform 0.3s;
+}
+
+.comment-list-container div:hover {
+  background-color: #444444;
+  transform: scale(1.02);
+}

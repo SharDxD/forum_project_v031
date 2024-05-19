@@ -1,5 +1,10 @@
-<div class="topic-detail-container">
-  <h2>{{ topic.title }}</h2>
-  <p>{{ topic.content }}</p>
-  <app-comment-list [topicId]="topic._id"></app-comment-list>
+<div class="topic-detail-container" *ngIf="topic">
+  <h2>{{ topic?.title }}</h2>
+  <p>{{ topic?.content }}</p>
+  <button (click)="editTopic()">Edit Topic</button> <!-- Add Edit Topic button -->
+  <button (click)="goBack()">Back to Topics</button>
 </div>
+<div *ngIf="!topic">
+  Loading topic...
+</div>
+

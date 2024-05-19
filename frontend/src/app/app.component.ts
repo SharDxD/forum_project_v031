@@ -5,6 +5,7 @@ import { FormsModule } from '@angular/forms';
 import { LoginComponent } from './auth/login/login.component';
 import { RegisterComponent } from './auth/register/register.component';
 import { CommentListComponent } from './components/comment-list/comment-list.component';
+import { AuthService } from './services/auth.service';
 
 @Component({
   selector: 'app-root',
@@ -14,5 +15,9 @@ import { CommentListComponent } from './components/comment-list/comment-list.com
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  title = 'forum-project';
+  constructor(public authService: AuthService) {}
+
+  logout() {
+    this.authService.logout();
+  }
 }

@@ -1,19 +1,14 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { CommentService } from '../../services/comment.service';
 import { AuthService } from '../../services/auth.service';
-import { Router } from '@angular/router';
-import { FormsModule } from '@angular/forms';
-import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-create-comment',
-  imports: [FormsModule, CommonModule],
-  standalone: true,
   templateUrl: './create-comment.component.html',
   styleUrls: ['./create-comment.component.css']
 })
 export class CreateCommentComponent {
-  @Input() topicId: string = '';
+  @Input() topicId!: string; // Use non-null assertion operator
   content: string = '';
 
   constructor(
@@ -25,7 +20,8 @@ export class CreateCommentComponent {
     const comment = { content: this.content, author: this.authService.currentUserValue.id };
     this.commentService.createComment(this.topicId, comment).subscribe(
       data => {
-        // Handle successful comment creation
+        // Handle successful comment creation, e.g., clear the form
+        this.content = '';
       },
       error => {
         console.error('Error creating comment', error);

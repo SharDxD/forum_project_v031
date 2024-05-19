@@ -1,5 +1,15 @@
 <nav>
-  <a routerLink="/login" routerLinkActive="active">Login</a>
-  <a routerLink="/register" routerLinkActive="active">Register</a>
+  <ul>
+    <li><a routerLink="/topics">Topics</a></li>
+    <li *ngIf="authService.currentUserValue">
+      <a (click)="logout()">Logout</a>
+    </li>
+    <li *ngIf="!authService.currentUserValue">
+      <a routerLink="/login">Login</a>
+    </li>
+    <li *ngIf="!authService.currentUserValue">
+      <a routerLink="/register">Register</a>
+    </li>
+  </ul>
 </nav>
 <router-outlet></router-outlet>

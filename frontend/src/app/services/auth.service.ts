@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable, BehaviorSubject } from 'rxjs';
 import { map } from 'rxjs/operators';
+import { Router } from '@angular/router';
 import { EventEmitter } from '@angular/core';
 
   @Injectable({
@@ -13,7 +14,7 @@ import { EventEmitter } from '@angular/core';
     public currentUser: Observable<any>;
     public navigateTo = new EventEmitter<string>();  // Add EventEmitter for navigation
   
-    constructor(private http: HttpClient) {  // Inject HttpClient
+    constructor(private http: HttpClient, private router: Router) {  // Inject HttpClient
       const currentUser = localStorage.getItem('currentUser');
       this.currentUserSubject = new BehaviorSubject<any>(currentUser ? JSON.parse(currentUser) : null);
       this.currentUser = this.currentUserSubject.asObservable();
@@ -23,6 +24,11 @@ import { EventEmitter } from '@angular/core';
       return this.currentUserSubject.value;
     }
   
+    getToken(): string {
+      const currentUser = this.currentUserValue;
+      return currentUser ? currentUser.token : '';
+    }
+    
     register(username: string, password: string): Observable<any> {
       return this.http.post<any>(`${this.apiUrl}/register`, { username, password });
     }
@@ -40,5 +46,6 @@ import { EventEmitter } from '@angular/core';
       this.currentUserSubject.next(null);
       this.navigateTo.emit('/login');  // Emit navigation event
     }
+  
   }
   
