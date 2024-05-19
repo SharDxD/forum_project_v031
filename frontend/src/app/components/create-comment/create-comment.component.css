@@ -1,0 +1,8 @@
+.create-comment-container {
+    margin: 20px;
+  }
+  .create-comment-container textarea {
+    width: 100%;
+    margin-bottom: 10px;
+  }
+  

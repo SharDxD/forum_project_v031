@@ -1,0 +1,6 @@
+<div class="topic-list-container">
+  <h2>Topics</h2>
+  <div *ngFor="let topic of topics">
+    <a [routerLink]="['/topics', topic._id]">{{ topic.title }}</a>
+  </div>
+</div>

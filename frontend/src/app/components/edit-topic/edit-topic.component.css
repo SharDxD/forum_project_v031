@@ -1,0 +1,9 @@
+.edit-topic-container {
+    margin: 20px;
+  }
+  .edit-topic-container input,
+  .edit-topic-container textarea {
+    width: 100%;
+    margin-bottom: 10px;
+  }
+  

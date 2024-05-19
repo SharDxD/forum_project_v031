@@ -1,0 +1,15 @@
+<div class="create-topic-container">
+    <h2>Create Topic</h2>
+    <form (submit)="createTopic()">
+      <div>
+        <label for="title">Title</label>
+        <input type="text" id="title" [(ngModel)]="title" name="title" required>
+      </div>
+      <div>
+        <label for="content">Content</label>
+        <textarea id="content" [(ngModel)]="content" name="content" required></textarea>
+      </div>
+      <button type="submit">Create</button>
+    </form>
+  </div>
+  
