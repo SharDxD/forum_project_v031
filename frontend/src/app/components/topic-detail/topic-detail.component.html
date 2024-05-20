@@ -1,14 +1,15 @@
-<div class="topic-detail-container" *ngIf="topic">
+<div class="topic-detail-container" *ngIf="topic" @fadeIn>
   <h2>{{ topic?.title }}</h2>
+  <!--<button *ngIf="authService.currentUserValue.role==='moderator'" [routerLink]="['/users']">View Users</button>-->
   <p>{{ topic?.content }}</p>
+  <p>{{ topic?.author }}</p>
   <button (click)="editTopic()">Edit Topic</button>
   <button [routerLink]="['comments']">View Comments</button>
   <button [routerLink]="['create-comment']">Add Comment</button>
   <router-outlet></router-outlet> <!-- Router outlet for child routes -->
   <button (click)="goBack()">Back to Topics</button>
+  <button *ngIf="isModerator()" class="delete-topic-button" (click)="deleteTopic(topic._id)">Delete</button>
 </div>
 <div *ngIf="!topic">
   Loading topic...
 </div>
-
-

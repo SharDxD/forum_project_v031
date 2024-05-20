@@ -2,12 +2,12 @@ const Topic = require('../models/topic');
 
 exports.getTopics = async (req, res) => {
     try {
-        const topics = await Topic.find().populate('author', 'username');
-        res.status(200).json(topics);
+      const topics = await Topic.find().populate('author', 'username'); // Populate author username
+      res.status(200).json(topics);
     } catch (error) {
-        res.status(500).json({ error: 'Error fetching topics' });
+      res.status(500).json({ error: 'Error fetching topics' });
     }
-};
+  };
 
 exports.getTopic = async (req, res) => {
     const { id } = req.params;
@@ -48,14 +48,13 @@ exports.updateTopic = async (req, res) => {
 };
 
 exports.deleteTopic = async (req, res) => {
-    const { id } = req.params;
     try {
-        const topic = await Topic.findByIdAndDelete(id);
-        if (!topic) {
-            return res.status(404).json({ error: 'Topic not found' });
-        }
-        res.status(200).json({ message: 'Topic deleted successfully' });
+      const topic = await Topic.findByIdAndDelete(req.params.id);
+      if (!topic) {
+        return res.status(404).json({ error: 'Topic not found' });
+      }
+      res.status(200).json({ message: 'Topic deleted successfully' });
     } catch (error) {
-        res.status(500).json({ error: 'Error deleting topic' });
+      res.status(500).json({ error: 'Error deleting topic' });
     }
-};
+  };

@@ -1,10 +1,16 @@
 .topic-list-container {
-    margin: 20px;
+    padding: 10rem;
   }
   .topic-list-container a {
-    text-decoration: none;
-    color: #007bff;
+    text-decoration: overline;
+    color: #a0ceff;
     display: block;
-    margin: 10px 0;
+    margin: 30px 0;
+  }
+  .topic-list-container b {
+    text-decoration: underline #a0ceff;
+    color: #ffffff;
+    display: block;
+    margin: 30px 0;
   }
   

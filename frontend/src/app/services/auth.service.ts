@@ -22,14 +22,14 @@ import { EventEmitter } from '@angular/core';
     public get currentUserValue() {
       return this.currentUserSubject.value;
     }
-  
+    
     getToken(): string {
       const currentUser = this.currentUserValue;
       return currentUser ? currentUser.token : '';
     }
   
-    register(username: string, password: string): Observable<any> {
-      return this.http.post<any>(`${this.apiUrl}/register`, { username, password });
+    register(username: string, password: string, role: string = 'user'): Observable<any> { // Added role parameter with default value 'user'
+      return this.http.post<any>(`${this.apiUrl}/register`, { username, password, role });
     }
   
     login(username: string, password: string): Observable<any> {

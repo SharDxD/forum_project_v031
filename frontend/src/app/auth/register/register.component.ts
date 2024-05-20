@@ -14,17 +14,17 @@ import { CommonModule } from '@angular/common';
 export class RegisterComponent {
   username: string = '';
   password: string = '';
+  role: string = 'user'; // Default role is 'user'
   errorMessage: string = '';
 
   constructor(
     private authService: AuthService,
-    private router: Router // Inject Router
+    private router: Router
   ) {}
 
   register() {
-    this.authService.register(this.username, this.password).subscribe(
+    this.authService.register(this.username, this.password, this.role).subscribe(
       data => {
-        // Navigate to login after successful registration
         this.router.navigate(['/login']);
       },
       error => {

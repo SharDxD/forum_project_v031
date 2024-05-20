@@ -10,6 +10,9 @@ import { CommentListComponent } from './components/comment-list/comment-list.com
 import { CreateCommentComponent } from './components/create-comment/create-comment.component';
 import { EditCommentComponent } from './components/edit-comment/edit-comment.component';
 import { AuthGuard } from './guards/auth.guard'; // Import AuthGuard
+import { ModeratorGuard } from './guards/moderator.guard'; 
+import { UserListComponent } from './components/user-list/user-list.component';
+
 
 export const routes: Routes = [
   { path: 'login', component: LoginComponent },
@@ -22,6 +25,7 @@ export const routes: Routes = [
   { path: 'create-topic', component: CreateTopicComponent, canActivate: [AuthGuard] },
   { path: 'edit-topic/:id', component: EditTopicComponent, canActivate: [AuthGuard] },
   { path: 'edit-comment/:id', component: EditCommentComponent, canActivate: [AuthGuard] },
+  { path: 'users', component: UserListComponent, canActivate: [AuthGuard] }, // Add UserListComponent route
   { path: '', redirectTo: '/topics', pathMatch: 'full' }
 ];
 

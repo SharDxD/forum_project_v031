@@ -2,6 +2,9 @@
   <ul>
     <li><a routerLink="/topics">Topics</a></li>
     <li *ngIf="authService.currentUserValue">
+      <a *ngIf="isModerator()" [routerLink]="['/users']">View Users</a>
+    </li>
+    <li *ngIf="authService.currentUserValue">
       <a (click)="logout()">Logout</a>
     </li>
     <li *ngIf="!authService.currentUserValue">

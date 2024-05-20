@@ -1,7 +1,8 @@
-<div class="topic-list-container">
-  <h2>Topics</h2>
-  <button (click)="addTopic()">Add Topic</button>
+<div class="topic-list-container" @fadeIn>
+  <h1>Topics</h1>
+  <button (click)="addTopic()"><h3>Add topic</h3></button>
   <div *ngFor="let topic of topics">
-    <a [routerLink]="['/topics', topic._id]">{{ topic.title }}</a>
+    <a [routerLink]="['/topics', topic._id]"><h2>{{ topic.title }}</h2></a>
+    <b class="topic-author"><h4>by {{ topic.createdAt }}</h4></b>
   </div>
 </div>

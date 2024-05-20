@@ -21,7 +21,7 @@ export class TopicService {
   }
 
   getTopics(): Observable<any> {
-    return this.http.get<any>(this.apiUrl);
+    return this.http.get<any>(this.apiUrl, this.getHttpOptions());
   }
 
   getTopic(id: string): Observable<any> {
@@ -36,7 +36,7 @@ export class TopicService {
     return this.http.put<any>(`${this.apiUrl}/${id}`, topic, this.getHttpOptions());
   }
 
-  deleteTopic(id: string): Observable<any> {
-    return this.http.delete<any>(`${this.apiUrl}/${id}`, this.getHttpOptions());
+  deleteTopic(topicId: string): Observable<any> {
+    return this.http.delete<any>(`${this.apiUrl}/${topicId}`, this.getHttpOptions());
   }
 }
