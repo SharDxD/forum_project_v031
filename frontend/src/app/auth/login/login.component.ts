@@ -12,25 +12,24 @@ import { CommonModule } from '@angular/common';
   styleUrls: ['./login.component.css']
 })
 
-export class LoginComponent implements OnInit {
+export class LoginComponent {
   username: string = '';
   password: string = '';
+  errorMessage: string = '';
 
-  constructor(private authService: AuthService, private router: Router) {
-    this.authService.navigateTo.subscribe(route => {
-      this.router.navigate([route]);
-    });
-  }
-
-  ngOnInit() {}
+  constructor(
+    private authService: AuthService,
+    private router: Router // Inject Router
+  ) {}
 
   login() {
     this.authService.login(this.username, this.password).subscribe(
       data => {
-        this.router.navigate(['/']);
+        // Navigate to topics after successful login
+        this.router.navigate(['/topics']);
       },
       error => {
-        console.error('Login error', error);
+        this.errorMessage = 'Invalid username or password';
       }
     );
   }

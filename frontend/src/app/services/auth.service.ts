@@ -9,12 +9,11 @@ import { EventEmitter } from '@angular/core';
     providedIn: 'root'
   })
   export class AuthService {
-    private apiUrl = 'http://localhost:3000/api/auth'; 
+    private apiUrl = 'http://localhost:3000/api/auth';
     private currentUserSubject: BehaviorSubject<any>;
     public currentUser: Observable<any>;
-    public navigateTo = new EventEmitter<string>();  // Add EventEmitter for navigation
   
-    constructor(private http: HttpClient, private router: Router) {  // Inject HttpClient
+    constructor(private http: HttpClient, private router: Router) {
       const currentUser = localStorage.getItem('currentUser');
       this.currentUserSubject = new BehaviorSubject<any>(currentUser ? JSON.parse(currentUser) : null);
       this.currentUser = this.currentUserSubject.asObservable();
@@ -28,7 +27,7 @@ import { EventEmitter } from '@angular/core';
       const currentUser = this.currentUserValue;
       return currentUser ? currentUser.token : '';
     }
-    
+  
     register(username: string, password: string): Observable<any> {
       return this.http.post<any>(`${this.apiUrl}/register`, { username, password });
     }
@@ -44,8 +43,6 @@ import { EventEmitter } from '@angular/core';
     logout() {
       localStorage.removeItem('currentUser');
       this.currentUserSubject.next(null);
-      this.navigateTo.emit('/login');  // Emit navigation event
+      this.router.navigate(['/login']);
     }
-  
   }
-  

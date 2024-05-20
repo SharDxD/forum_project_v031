@@ -11,25 +11,24 @@ import { CommonModule } from '@angular/common';
   templateUrl: './register.component.html',
   styleUrls: ['./register.component.css']
 })
-export class RegisterComponent implements OnInit {
+export class RegisterComponent {
   username: string = '';
   password: string = '';
+  errorMessage: string = '';
 
-
-  constructor(private authService: AuthService, private router: Router) {
-    this.authService.navigateTo.subscribe(route => {
-      this.router.navigate([route]);
-    });
-  }
-  ngOnInit() {}
+  constructor(
+    private authService: AuthService,
+    private router: Router // Inject Router
+  ) {}
 
   register() {
     this.authService.register(this.username, this.password).subscribe(
       data => {
+        // Navigate to login after successful registration
         this.router.navigate(['/login']);
       },
       error => {
-        console.error('Registration error', error);
+        this.errorMessage = 'Registration failed';
       }
     );
   }

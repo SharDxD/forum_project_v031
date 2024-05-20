@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { AuthService } from './auth.service';
 
 @Injectable({
   providedIn: 'root'
@@ -8,25 +9,34 @@ import { Observable } from 'rxjs';
 export class CommentService {
   private apiUrl = 'http://localhost:3000/api/comments';
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient, private authService: AuthService) {}
 
-  getComments(topicId: string): Observable<any> {
-    return this.http.get<any>(`${this.apiUrl}/${topicId}/comments`);
+  getHttpOptions() {
+    const token = this.authService.getToken();
+    return {
+      headers: new HttpHeaders({
+        'Authorization': `Bearer ${token}`
+      })
+    };
   }
 
-  getComment(id: string): Observable<any> {
-    return this.http.get<any>(`${this.apiUrl}/${id}`);
+  getComments(topicId: string): Observable<any> {
+    return this.http.get<any>(`${this.apiUrl}/${topicId}`, this.getHttpOptions());
+  }
+
+  getComment(commentId: string): Observable<any> {
+    return this.http.get<any>(`${this.apiUrl}/comment/${commentId}`, this.getHttpOptions());
   }
 
   createComment(topicId: string, comment: any): Observable<any> {
-    return this.http.post<any>(`${this.apiUrl}/${topicId}/comments`, comment);
+    return this.http.post<any>(`${this.apiUrl}/${topicId}`, comment, this.getHttpOptions());
   }
 
-  updateComment(id: string, comment: any): Observable<any> {
-    return this.http.put<any>(`${this.apiUrl}/${id}`, comment);
+  updateComment(commentId: string, comment: any): Observable<any> {
+    return this.http.put<any>(`${this.apiUrl}/${commentId}`, comment, this.getHttpOptions());
   }
 
-  deleteComment(id: string): Observable<any> {
-    return this.http.delete<any>(`${this.apiUrl}/${id}`);
+  deleteComment(commentId: string): Observable<any> {
+    return this.http.delete<any>(`${this.apiUrl}/${commentId}`, this.getHttpOptions());
   }
 }

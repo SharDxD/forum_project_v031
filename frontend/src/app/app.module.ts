@@ -26,14 +26,15 @@ import { AuthGuard } from './guards/auth.guard';
     TopicDetailComponent,
     CreateTopicComponent,
     EditTopicComponent,
-    // CommentListComponent, // Ensure CommentListComponent is declared here
-    // CreateCommentComponent, // Ensure CreateCommentComponent is declared here
-    // EditCommentComponent
-  ],
-  imports: [
     CommentListComponent, // Ensure CommentListComponent is declared here
     CreateCommentComponent, // Ensure CreateCommentComponent is declared here
-    EditCommentComponent,
+    EditCommentComponent
+  ],
+  imports: [
+    // CommentListComponent, // Ensure CommentListComponent is declared here
+    // CreateCommentComponent, // Ensure CreateCommentComponent is declared here
+    // EditCommentComponent,
+    
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,

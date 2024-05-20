@@ -14,7 +14,7 @@ app.use(bodyParser.json());
 app.use('/api/auth', authRoutes);
 app.use('/api/users', userRoutes);
 app.use('/api/topics', topicRoutes); // Use topic routes
-app.use('/api/comments', commentRoutes);
+app.use('/api/comments', commentRoutes); 
 
 app.get('/', (req, res) => {
     res.send('Welcome to the Forum API');
